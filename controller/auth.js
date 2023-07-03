@@ -4,6 +4,14 @@ import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 
 export const Register = async (req, res) => {
+  function isEmailValid(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    return emailRegex.test(email);
+  }
+
+  const isValid = isEmailValid(req.body.email);
+  if (!isValid) return res.status(400).send("input a valid email");
   try {
     const existingUser = await User.findOne({
       $or: [

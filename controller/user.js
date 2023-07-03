@@ -47,7 +47,7 @@ export const getFriends = async (req, res) => {
         })
       );
 
-      const sanitizedFriends = friends.map(({ password, ...others }) => others);
+      const sanitizedFriends = friends.map(({ password, ...others }) => others._doc);
       res.status(200).json(sanitizedFriends);
     } else {
       res.status(200).json("You have no friends");

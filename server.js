@@ -30,11 +30,24 @@ app.use("/api/auth", authroute);
 app.use("/api/users", usersroute);
 app.use("/api/post", postroute);
 
-const db = async (err) => {
-  await connect(process.env.MONGO_URI);
-  if (err) return res.status(400).json(err);
-  console.log(`database connection complete`);
+const db = async () => {
+  try {
+    // Attempt to connect to the first URL
+    await connect(process.env.MONGO_URI);
+    console.log('Database connection successful locally');
+  } catch (firstUrlError) {
+    try {
+      // If the first URL connection fails, attempt to connect to the second URL
+      await connect(process.env.MONGO_URL);
+      console.log('Database connection successful on air');
+    } catch (secondUrlError) {
+      console.error('Failed to connect to both URLs:', secondUrlError);
+    }
+  }
 };
+
+
+
 
 app.get("/", (req, res) => {
   res.status(200).json("Welcome to Vhiz Social");
