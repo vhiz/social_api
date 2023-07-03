@@ -4,9 +4,14 @@ import "dotenv/config";
 import { connect } from "mongoose";
 import { limiter } from "./utils/limiter.js";
 import cookieParser from "cookie-parser";
+import helmet from "helmet";
 
 const app = express();
 
+import authroute from "./route/auth.js";
+import usersroute from "./route/users.js";
+
+//middlewares
 app.use(
   treblle({
     apiKey: process.env.TREBLLE_API_KEY,
@@ -14,8 +19,14 @@ app.use(
     additionalFieldsToMask: [],
   })
 );
+app.use(express.json());
+app.use(helmet());
 app.use(limiter(10000, 5, "You can not make any request at this time"));
 app.use(cookieParser());
+
+//routes
+app.use("/api/auth", authroute);
+app.use("/api/user", usersroute);
 
 const db = async (err) => {
   await connect(process.env.MONGO_URI);
