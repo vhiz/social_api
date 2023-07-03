@@ -10,6 +10,7 @@ const app = express();
 
 import authroute from "./route/auth.js";
 import usersroute from "./route/users.js";
+import postroute from "./route/posts.js";
 
 //middlewares
 app.use(
@@ -26,7 +27,8 @@ app.use(cookieParser());
 
 //routes
 app.use("/api/auth", authroute);
-app.use("/api/user", usersroute);
+app.use("/api/users", usersroute);
+app.use("/api/post", postroute);
 
 const db = async (err) => {
   await connect(process.env.MONGO_URI);

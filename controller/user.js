@@ -34,6 +34,29 @@ export const editUser = async (req, res) => {
   }
 };
 
+//get friends
+
+export const getFriends = async (req, res) => {
+  try {
+    const currentUser = await User.findOne({ _id: req.userId });
+
+    if (currentUser.followings.length > 0) {
+      const friends = await Promise.all(
+        currentUser.followings.map((friendId) => {
+          return User.findOne({ _id: friendId });
+        })
+      );
+
+      const sanitizedFriends = friends.map(({ password, ...others }) => others);
+      res.status(200).json(sanitizedFriends);
+    } else {
+      res.status(200).json("You have no friends");
+    }
+  } catch (error) {
+    res.status(400).json({ error: error });
+  }
+};
+
 //delete user
 export const deleteUser = async (req, res) => {
   try {
