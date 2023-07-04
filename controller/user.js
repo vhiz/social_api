@@ -78,3 +78,44 @@ export const deleteUser = async (req, res) => {
     res.status(400).json({ error });
   }
 };
+
+//search users
+export const search = async (req, res) => {
+  const query = req.query.q;
+  try {
+    const users = await User.find({
+      username: { $regex: query, $options: "i" },
+    }).limit(40);
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
+// follow and unfollow users
+
+export const Relationship = async (req, res) => {
+  const userToFollow = await User.findById(req.body.userId);
+
+  if (!userToFollow) {
+    return res.status(404).send("User you want to follow not found");
+  }
+
+  const currentUser = await User.findById(req.userId);
+
+  if (!currentUser) {
+    return res.status(404).send("User not found");
+  }
+
+  const isUserAlreadyFollowed = currentUser.followings.includes(
+    req.body.userId
+  );
+
+  if (!isUserAlreadyFollowed) {
+    await currentUser.updateOne({ $push: { followings: req.body.userId } });
+    return res.status(200).send("User has been followed");
+  } else {
+    await currentUser.updateOne({ $pull: { followings: req.body.userId } });
+    return res.status(200).send("User has been unfollowed");
+  }
+};

@@ -138,17 +138,19 @@ Request: GET
 ```
 http://localhost:3000/api/users
 ```
+
 and the good part is that there is no room for any injection of some sort.
 
 ### EDIT USER
 
-
 ```
 Request: PUT
 ```
+
 ```
 http://localhost:3000/api/users
 ```
+
 As in the get user no need to input any id in the params as long as you login you can use your id anywhere in the app, you just have to input the part you want to change
 
 ```
@@ -171,24 +173,61 @@ just set the delete to true and it will delete the user
 }
 ```
 
-### GET ALL MY FRIENDS
-to get all the friends of the current user
+### SEARCH FOR A USER
+
+to search for a user you will use the query function
+
 ```
 Request: GET
 ```
+
+```
+http://localhost:3000/api/users/search?q=victor
+```
+
+you can replace the victor with your search string of choice mind you it must be the username
+
+### ADD A FRIEND
+
+```
+Request: PUT
+```
+
+```
+http://localhost:3000/api/users/relationship
+```
+
+to add a friend you will need to get the id of the friend you want to add you can do this by simply searching for the friend you want to add with the search for a user endpoint and copy the id of the friend you want to add and pass it to the body as userId
+
+```
+{
+  "userId":"0d8786c0-d652-442e-8fd4-cd8607d4678f"
+}
+```
+
+### GET ALL MY FRIENDS
+
+to get all the friends of the current user
+
+```
+Request: GET
+```
+
 ```
 http://localhost:3000/api/users/myfriends
 ```
 
 ### CREATE A POST
+
 ```
 Request: POST
 ```
+
 ```
 http://localhost:3000/api/post
 ```
-to create a post You just need to provide the description like this but you first need to login
 
+to create a post You just need to provide the description like this but you first need to login
 
 ```
 {
@@ -197,9 +236,11 @@ to create a post You just need to provide the description like this but you firs
 ```
 
 ### GET USER FOLLOWING POST
+
 ```
 Request: GET
 ```
+
 ```
 http://localhost:3000/api/post
 ```
@@ -207,14 +248,16 @@ http://localhost:3000/api/post
 this is to check all the post of the users friends with the current user
 
 ### GET MY POST
+
 ```
 Request: GET
 ```
+
 ```
 http://localhost:3000/api/post/mypost
 ```
 
-this is to check the current users post 
+this is to check the current users post
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
