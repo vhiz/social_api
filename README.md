@@ -16,7 +16,6 @@
 
 ---
 
-
 ## 📝 Table of Contents
 
 - [About](#about)
@@ -39,7 +38,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-First you need to have node installed in your local machine and you can install mongodb compass (optional) 
+First you need to have node installed in your local machine and you can install mongodb compass (optional)
 
 then you need to install git for version control
 
@@ -49,16 +48,19 @@ copy this code to your CMD or terminal
 ```
 git clone https://github.com/vhiz/social_api.git
 ```
+
 after cloning open the code in any editor of your choice and install all the dependencies
 
-by running 
+by running
 
 ```
 npm install
 ```
+
 in your terminal(must be in the root directory of the project)
 
 ### Note
+
 this app when testing was use mongodb compass (locally) but if you do not have mongodb localy running on your machine it will automatically direct you to the MongoDB server(atlas) as i have created a cluster for this project.
 
 ps the env file will come with the project as not to confuse anyone
@@ -67,45 +69,152 @@ A step by step series of examples that tell you how to get a development env run
 
 Say what the step will be
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
 ## 🔧 Running the tests <a name = "tests"></a>
 
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+### HOME PAGE
 
 ```
-Give an example
+Requset:GET
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
 ```
 
-## 🎈 Usage <a name="usage"></a>
+http://localhost:3000/
+```
 
-Add notes about how to use the system.
+### Registration
 
-## 🚀 Deployment <a name = "deployment"></a>
+```
+request: POST
+```
 
-Add additional notes about how to deploy this on a live system.
+```
+http://localhost:3000/api/auth/register
+```
+
+in the registration endpoint your username, password and email will be required and the username and password must not be less than 4 characters as shown below
+
+```
+{
+  "username":"victor1",
+  "password":"1234",
+  "email":"vhiz@gmail.com"
+}
+```
+
+if the email must be vallid before it accept the form
+and you can only register 5 times daily because of rate limiting
+
+### SIGNING IN
+
+```
+request: POST
+```
+
+```
+http://localhost:3000/api/auth/login
+```
+
+to sign in you need to input your username and password as follows
+
+```
+{
+  "username":"victor1",
+  "password":"1234",
+}
+```
+
+when you are done sigingin your id will be converterted in to a token and saved in the cookies of the application
+which uses json web tokens for the autorization process
+
+### GET CURRENT USER
+
+in the root directory of the project there is a folder labeled utils and in that folder ther is a file called jwt.js which handles all the verification ie it takes the cookie and decodes it and sets it in the req.userId so there is no need to input any id in the params as long as you login and go to the get user endpoint it will return the current user
+
+```
+Request: GET
+```
+
+```
+http://localhost:3000/api/users
+```
+and the good part is that there is no room for any injection of some sort.
+
+### EDIT USER
+
+
+```
+Request: PUT
+```
+```
+http://localhost:3000/api/users
+```
+As in the get user no need to input any id in the params as long as you login you can use your id anywhere in the app, you just have to input the part you want to change
+
+```
+{
+  "password":"12345"
+}
+```
+
+### DELETE USER
+
+```
+Request: DELETE
+```
+
+just set the delete to true and it will delete the user
+
+```
+{
+  "delete": true
+}
+```
+
+### GET ALL MY FRIENDS
+to get all the friends of the current user
+```
+Request: GET
+```
+```
+http://localhost:3000/api/users/myfriends
+```
+
+### CREATE A POST
+```
+Request: POST
+```
+```
+http://localhost:3000/api/post
+```
+to create a post You just need to provide the description like this but you first need to login
+
+
+```
+{
+  "desc":"My first post"
+}
+```
+
+### GET USER FOLLOWING POST
+```
+Request: GET
+```
+```
+http://localhost:3000/api/post
+```
+
+this is to check all the post of the users friends with the current user
+
+### GET MY POST
+```
+Request: GET
+```
+```
+http://localhost:3000/api/post/mypost
+```
+
+this is to check the current users post 
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
@@ -117,4 +226,3 @@ Add additional notes about how to deploy this on a live system.
 ## ✍️ Authors <a name = "authors"></a>
 
 - [@vhiz](https://github.com/vhiz) - Idea & Initial work
-

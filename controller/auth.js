@@ -11,7 +11,10 @@ export const Register = async (req, res) => {
   }
 
   const isValid = isEmailValid(req.body.email);
-  if (!isValid) return res.status(400).send("input a valid email");
+  if (!isValid) return res.status(403).send("input a valid email");
+
+  if (req.body.password.length < 4)
+    return res.status(403).send("password must be at least 4 characters long");
   try {
     const existingUser = await User.findOne({
       $or: [

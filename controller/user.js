@@ -27,7 +27,11 @@ export const editUser = async (req, res) => {
       const salt = bcryptjs.genSaltSync(10);
       updatedData.password = bcryptjs.hashSync(password, salt);
     }
-    await User.findOneAndUpdate({ _id: req.userId }, { $set: updatedData });
+    const user = await User.findOneAndUpdate(
+      { _id: req.userId },
+      { $set: updatedData }
+    );
+    if (!user) return res.status(404).send("User not found");
     res.status(200).send("User updated");
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -40,6 +44,7 @@ export const getFriends = async (req, res) => {
   try {
     const currentUser = await User.findOne({ _id: req.userId });
 
+    if (!currentUser) return res.status(404).send("User not found");
     if (currentUser.followings.length > 0) {
       const friends = await Promise.all(
         currentUser.followings.map((friendId) => {
@@ -47,7 +52,9 @@ export const getFriends = async (req, res) => {
         })
       );
 
-      const sanitizedFriends = friends.map(({ password, ...others }) => others._doc);
+      const sanitizedFriends = friends.map(
+        ({ password, ...others }) => others._doc
+      );
       res.status(200).json(sanitizedFriends);
     } else {
       res.status(200).json("You have no friends");
