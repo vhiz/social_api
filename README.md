@@ -57,15 +57,21 @@ by running
 npm install
 ```
 
+then
+
+```
+npm start
+```
+
 in your terminal(must be in the root directory of the project)
 
 ### Note
 
-this app when testing was use mongodb compass (locally) but if you do not have mongodb localy running on your machine it will automatically direct you to the MongoDB server(atlas) as i have created a cluster for this project.
+this app when testing was to use mongodb compass (locally) but if you do not have mongodb locally running on your machine it will automatically direct you to the MongoDB server(atlas) as I have created a cluster for this project.
 
-ps the env file will come with the project as not to confuse anyone
+ps the env file will come with the project so as not to confuse anyone
 
-A step by step series of examples that tell you how to get a development env running.
+A step-by-step series of examples that tell you how to get a development env running.
 
 Say what the step will be
 
@@ -74,7 +80,7 @@ Say what the step will be
 ### HOME PAGE
 
 ```
-Requset:GET
+Request: GET
 ```
 
 ```
@@ -96,13 +102,13 @@ in the registration endpoint your username, password and email will be required 
 
 ```
 {
-  "username":"victor1",
-  "password":"1234",
-  "email":"vhiz@gmail.com"
+  "username": "victor1",
+  "password": "1234",
+  "email": "vhiz@gmail.com"
 }
 ```
 
-if the email must be vallid before it accept the form
+if the email must be valid before it accepts the form
 and you can only register 5 times daily because of rate limiting
 
 ### SIGNING IN
@@ -119,17 +125,17 @@ to sign in you need to input your username and password as follows
 
 ```
 {
-  "username":"victor1",
-  "password":"1234",
+  "username": "victor1",
+  "password": "1234",
 }
 ```
 
-when you are done sigingin your id will be converterted in to a token and saved in the cookies of the application
-which uses json web tokens for the autorization process
+when you are done signing in your id will be converted into a token and saved in the cookies of the application
+which uses JSON web tokens for the authorization process
 
 ### GET CURRENT USER
 
-in the root directory of the project there is a folder labeled utils and in that folder ther is a file called jwt.js which handles all the verification ie it takes the cookie and decodes it and sets it in the req.userId so there is no need to input any id in the params as long as you login and go to the get user endpoint it will return the current user
+in the root directory of the project, there is a folder labelled utils and in that folder, there is a file called jwt.js which handles all the verification ie it takes the cookie and decodes it and sets it in the req.userId so there is no need to input any id in the params as long as you log in and go to the get user endpoint it will return the current user
 
 ```
 Request: GET
@@ -155,7 +161,7 @@ As in the get user no need to input any id in the params as long as you login yo
 
 ```
 {
-  "password":"12345"
+  "password": "12345"
 }
 ```
 
@@ -197,7 +203,7 @@ Request: PUT
 http://localhost:3000/api/users/relationship
 ```
 
-to add a friend you will need to get the id of the friend you want to add you can do this by simply searching for the friend you want to add with the search for a user endpoint and copy the id of the friend you want to add and pass it to the body as userId
+to add a friend you will need to get the id of the friend you want to add you can do this by simply searching for the friend you want to add with the search for a user endpoint and copying the id of the friend you want to add and pass it to the body as userId
 
 ```
 {
@@ -227,15 +233,15 @@ Request: POST
 http://localhost:3000/api/post
 ```
 
-to create a post You just need to provide the description like this but you first need to login
+to create a post You just need to describe this but you first need to login
 
 ```
 {
-  "desc":"My first post"
+  "desc": "My first post"
 }
 ```
 
-### GET USER FOLLOWING POST
+### GET THE USER FOLLOWING THE POST
 
 ```
 Request: GET
@@ -245,7 +251,7 @@ Request: GET
 http://localhost:3000/api/post
 ```
 
-this is to check all the post of the users friends with the current user
+this is to check all the posts of the users' friends with the current user
 
 ### GET MY POST
 
@@ -257,7 +263,7 @@ Request: GET
 http://localhost:3000/api/post/mypost
 ```
 
-this is to check the current users post
+this is to check the current users' post
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
