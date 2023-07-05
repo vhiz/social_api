@@ -75,3 +75,13 @@ export const Login = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const Logout = (req, res) => {
+  res
+    .clearCookie("social", {
+      sameSite: "none",
+      secure: true,
+    })
+    .status(200)
+    .json("loged out");
+};

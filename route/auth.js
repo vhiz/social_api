@@ -1,5 +1,5 @@
 import express from "express";
-import { Login, Register } from "../controller/auth.js";
+import { Login, Logout, Register } from "../controller/auth.js";
 import { limiter } from "../utils/limiter.js";
 const router = express.Router();
 
@@ -23,4 +23,5 @@ router.post(
   Login
 );
 
+router.get("/logout", Logout);
 export default router;

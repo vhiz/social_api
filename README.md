@@ -265,6 +265,17 @@ http://localhost:3000/api/post/mypost
 
 this is to check the current users' post
 
+
+### LOGOUT
+
+```
+Request: GET
+```
+```
+http://localhost:3000/api/auth/logout
+```
+this is to logout the current user
+
 ## ⛏️ Built Using <a name = "built_using"></a>
 
 - [MongoDB](https://www.mongodb.com/) - Database
