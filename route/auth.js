@@ -1,6 +1,7 @@
 import express from "express";
 import { Login, Logout, Register } from "../controller/auth.js";
 import { limiter } from "../utils/limiter.js";
+import { verifedToken } from "../utils/jwt.js";
 const router = express.Router();
 
 router.post(
@@ -23,5 +24,5 @@ router.post(
   Login
 );
 
-router.get("/logout", Logout);
+router.get("/logout", verifedToken,Logout);
 export default router;
