@@ -52,10 +52,12 @@ export const getFriends = async (req, res) => {
         })
       );
 
-      const sanitizedFriends = friends.map(
-        ({ password, ...others }) => others._doc
-      );
-      res.status(200).json(sanitizedFriends);
+      let friendList = [];
+      friends.map((friend) => {
+        const { _id, username, email } = friend;
+        friendList.push({ _id, username, email });
+      });
+      res.status(200).json(friendList);
     } else {
       res.status(200).json("You have no friends");
     }
@@ -86,7 +88,14 @@ export const search = async (req, res) => {
     const users = await User.find({
       username: { $regex: query, $options: "i" },
     }).limit(40);
-    res.status(200).json(users);
+
+    let searchUser = [];
+    users.map((user) => {
+      const { _id, username, email } = user;
+      searchUser.push({ _id, username, email });
+    });
+
+    res.status(200).json(searchUser);
   } catch (error) {
     res.status(400).json(error);
   }
@@ -106,6 +115,9 @@ export const Relationship = async (req, res) => {
   if (!currentUser) {
     return res.status(404).send("User not found");
   }
+
+  if (req.body.userId === currentUser._id)
+    return res.status(409).json("You can't add yourself as a friend");
 
   const isUserAlreadyFollowed = currentUser.followings.includes(
     req.body.userId
