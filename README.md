@@ -19,26 +19,19 @@
 ## 📝 Table of Contents
 
 - [About](#about)
-- [Getting Started](#getting_started)
-- [Deployment](#deployment)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
+
 
 ## 🧐 About <a name = "about"></a>
 
-The purose of this project is to showcase my skill in api development through a social media api
+The purpose of this project is to showcase my skill in API development through a social media API
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-First you need to have node installed in your local machine and you can install mongodb compass (optional)
+First, you need to have node installed in your local machine and you can install mongodb compass (optional) i personally use MongoDB locally but there is provision for the online cluster
 
 then you need to install git for version control
 
@@ -132,6 +125,8 @@ to sign in you need to input your username and password as follows
 
 when you are done signing in your id will be converted into a token and saved in the cookies of the application
 which uses JSON web tokens for the authorization process
+
+note: you must be logged in from here on for all the endpoints to work
 
 ### GET CURRENT USER
 
