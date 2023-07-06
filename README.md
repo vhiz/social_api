@@ -166,6 +166,8 @@ As in the get user no need to input any id in the params as long as you login yo
 Request: DELETE
 ```
 ```
+http://localhost:3000/api/users
+```
 
 just set the delete to true and it will delete the user
 
@@ -174,8 +176,7 @@ just set the delete to true and it will delete the user
   "delete": true
 }
 ```
-http://localhost:3000/api/users
-```
+
 
 ### SEARCH FOR A USER
 
